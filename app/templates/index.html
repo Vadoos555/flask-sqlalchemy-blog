@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% if current_user.is_anonymous %}
+    <h1>Hello Stranger</h1><br>
+{% else %}
+    <h1>Hello, {{ current_user.username|upper }}!</h1><br>
+{% endif %}
+
+    <h2>List of posts</h2>
+    <div>
+    <ul class="list-posts">
+    {% for p in posts %}
+        <li>
+            <p> <a href="{{ url_for('show_post', post_id=p.id) }}">{{ p.title }}</a> </p>
+            <p>{{ p.body[:200] }}</p>
+            <p>{{ p.timestamp }}</p>
+            <p>{{ p.author }}</p>
+        </li>
+    </ul>
+    {% endfor %}
+    </div>
+{% endblock %}

@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{{ super() }}
+<p>{{ post.title }}</p>
+<p>{{ post.body }}</p>
+<form action="" method="post" class="form-content">
+  <p><button type="submit">Delete post</button></p>
+</form>
+
+
+{% endblock %}
+
+

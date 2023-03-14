@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link type="text/css" href="{{ url_for('static', filename='css/styles.css')}}" rel="stylesheet" />
+    {% if title %}
+    <title>{{ title }} – Flask</title>
+    {% else %}
+    <title>Flask</title>
+    {% endif %}
+</head>
+<body>
+    <div>
+        <ul class="mainmenu">
+            {% if current_user.is_anonymous %}
+            <li><a href="{{ url_for('register') }}">Register</a></li>
+            <li><a href="{{url_for('login')}}">Login</a></li>
+            {% else %}
+            <li><a href="{{url_for('index')}}">Homepage</a></li>
+            <li><a href="{{ url_for('add_post') }}">Add post</a></li>
+            <li><a href="{{ url_for('logout') }}">Logout</a></li>
+            {% endif %}
+        </ul>
+    </div>
+    <hr>
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <ul>
+        {% for mess in messages %}
+        <li>{{mess}}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    {% endwith %}
+    <div class="content">
+    {% block content %}
+    {% endblock %}
+    </div>
+</body>
+</html>
